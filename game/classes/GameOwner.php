@@ -57,7 +57,7 @@
 				
 				foreach ($gamerIdList as $gamerId) {
 					$userModel = new UserModel($gamerId, $gameId, $this->dataBaseController);
-					$isSuccess = $userModel->setNewModel(array_pop($usersProfessionList), $colorList[$index]) ? $isSuccess : false;
+					$isSuccess = $userModel->setNewModel(array_pop($usersProfessionList), $colorList[$index]) ? $isSuccess : false;					
 					$index++;
 				}
 				
