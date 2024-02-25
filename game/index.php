@@ -28,11 +28,6 @@
 	
 	$results = null;
 	
-	// printR('$this->userId', $this->userId);
-	// printR('$this->gameId', $this->gameId);
-	// printR('$this->userRoleId', $this->userRoleId);
-	// printR('$obj', $obj);
-	
 	switch ($route['body']) {
 		case GameQueryElements::GAME_PREPARATION:
 			$results = $game->preparation();

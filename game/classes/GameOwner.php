@@ -5,7 +5,7 @@
 			$sql = "SELECT * FROM game_info WHERE owner_id = '$this->userId' AND is_game_begun = " . GameProcessingModes::START;
 			$results = $this->dataBaseController->getter($sql);
 			if (!$results) {
-				$this->responseCreator->setError();
+				$this->responseCreator->setError('GameOwner->preparation. Get started game error');
 				return $this->responseCreator->getData();
 			}
 			$this->responseCreator->setData('game_info', $results[0]);
@@ -19,7 +19,7 @@
 			$sql = "SELECT * FROM users WHERE game_id = '$gameId' AND user_role_id = '3'";
 			$results = $this->dataBaseController->getter($sql);
 			if (!$results) {
-				$this->responseCreator->setError();
+				$this->responseCreator->setError('GameOwner->preparation. Get list of the gamers error');
 				return $this->responseCreator->getData();
 			}
 			foreach ($results as $item) {
@@ -31,7 +31,7 @@
 				$sql = "UPDATE game_info SET gamer_index_turn='-1' WHERE id='$gameId'";
 				$isSuccess = $this->dataBaseController->setter($sql);
 				if (!$isSuccess) {
-					$this->responseCreator->setError('gamer_id_turn prepare error');
+					$this->responseCreator->setError('GameOwner->preparation. gamer_id_turn prepare error');
 					return $this->responseCreator->getData();
 				}
 			}
@@ -41,7 +41,7 @@
 				// - Card
 				$isSuccess = $this->cardConstructor->createRNDCardLists($gameId, CardTypes::ALL_TYPES);
 				if (!$isSuccess) {
-					$this->responseCreator->setError('createRNDCardLists error');
+					$this->responseCreator->setError('GameOwner->preparation. createRNDCardLists error');
 					return $this->responseCreator->getData();
 				}
 				
@@ -62,7 +62,7 @@
 				}
 				
 				if (!$isSuccess) {
-					$this->responseCreator->setError('not prepared error');
+					$this->responseCreator->setError('GameOwner->preparation. not prepared error');
 					return $this->responseCreator->getData();
 				}				
 				$this->preparationGetSomeGamerInformation();
@@ -71,7 +71,7 @@
 				$sql = "UPDATE game_info SET is_game_prepared='1' WHERE id='$gameId'";
 				$isSuccess = $this->dataBaseController->setter($sql);
 				if (!$isSuccess) {
-					$this->responseCreator->setError('update is prepared error');
+					$this->responseCreator->setError('GameOwner->preparation. update is prepared error');
 					return $this->responseCreator->getData();
 				}
 			} else {
