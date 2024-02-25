@@ -7,7 +7,6 @@
 				
 			$isSuccess = $dataBaseController->setter($sql);
 			if (!$isSuccess) {
-				echo 'UserModelConstructor. user_model error';
 				return false;
 			}
 			
@@ -16,7 +15,6 @@
 				VALUES ('$gamerId', '$gameId', '" . $profession['incomes']['salary'] . "')";
 			$isSuccess = $dataBaseController->setter($sql);
 			if (!$isSuccess) {
-				echo 'UserModelConstructor. user_model_incomes_const error';
 				return false;
 			}
 			
@@ -34,7 +32,6 @@
 				) VALUES ( '$gamerId', '$gameId', '$v1', '$v2', '$v3', '$v4', '$v5', '$v6', '$v7' )";
 			$isSuccess = $dataBaseController->setter($sql);
 			if (!$isSuccess) {
-				echo 'UserModelConstructor. user_model_expenses_const error';
 				return false;
 			}
 			
@@ -43,7 +40,6 @@
 				VALUES ('$gamerId', '$gameId', '" . $profession['assets']['savings'] . "')";
 			$isSuccess = $dataBaseController->setter($sql);
 			if (!$isSuccess) {
-				echo 'UserModelConstructor. user_model_assets_const error';
 				return false;
 			}
 			
@@ -59,7 +55,6 @@
 				) VALUES ( '$gamerId', '$gameId', '$v1', '$v2', '$v3', '$v4', '$v5' )";
 			$isSuccess = $dataBaseController->setter($sql);
 			if (!$isSuccess) {
-				echo 'UserModelConstructor. user_model_credit_liabilities_const error';
 				return false;
 			}
 			
@@ -68,7 +63,7 @@
 				VALUES ('$gamerId', '$gameId', '" . $profession['childExpenses'] . "')";
 			$isSuccess = $dataBaseController->setter($sql);
 			if (!$isSuccess) {
-				echo 'UserModelConstructor. user_model_child_expenses_const error';
+				
 				return false;
 			}
 			
@@ -78,7 +73,6 @@
 				) VALUES ('$gamerId', '$gameId', '0', '0', '0')";			
 			$isSuccess = $dataBaseController->setter($sql);
 			if (!$isSuccess) {
-				echo 'UserModelConstructor. user_model_total error';
 				return false;
 			}
 			
@@ -88,7 +82,6 @@
 							) VALUES ('$gamerId', '$gameId', '-1', '', '')";
 			$isSuccess = $dataBaseController->setter($sql);
 			if (!$isSuccess) {
-				echo 'UserModelConstructor. user_model_dream error';
 				return false;
 			}
 			
