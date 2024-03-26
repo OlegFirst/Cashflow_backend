@@ -38,7 +38,8 @@
 		
 		function getUserData() {
 			$sql = "SELECT id, name, user_role_id, game_id FROM users WHERE login = '$this->login' AND password = '$this->password'";			
-			$results = $this->dataBaseController->getter($sql);			
+			$results = $this->dataBaseController->getter($sql);
+			
 			if (!$results) {
 				return $results;
 			}
@@ -69,7 +70,7 @@
 				ON users.id=user_model.gamer_id
 				WHERE users.game_id='$gameId' AND users.user_role_id='3'";
 			$results = $this->dataBaseController->getter($sql);
-			$this->resultsCreator->setData('gamer_list', $results);
+			$this->resultsCreator->setData('gamer_list', $results ?? []);
 			
 			return $this->resultsCreator->getData();
 		}

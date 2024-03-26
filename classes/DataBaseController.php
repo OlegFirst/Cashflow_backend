@@ -17,7 +17,7 @@
 				}
 			}
 			
-			$connection->close();			
+			$connection->close();
 			
 			return count($matrix) > 0 ? $matrix : null;
 		}
