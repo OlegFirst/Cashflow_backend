@@ -85,6 +85,35 @@
 				return false;
 			}
 			
+			// Arithmetic table correction. Insert Money flow, Total_ncomes, expences (start)
+			$sql = "INSERT INTO user_model_arithmetic (gamer_id, game_id, property, sub_property, value, result)
+				VALUES (
+					'$gamerId', '$gameId', 'money_flow', '-1', '".$profession['moneyFlow']."', '".$profession['moneyFlow']."'
+				)";
+			$isSuccess = $dataBaseController->setter($sql);
+			if (!$isSuccess) {
+				return false;
+			}
+			
+			$sql = "INSERT INTO user_model_arithmetic (gamer_id, game_id, property, sub_property, value, result)
+				VALUES (
+					'$gamerId', '$gameId', 'incomes', 'total_incomes', '".$profession['incomes']['totalIncomes']."', '".$profession['incomes']['totalIncomes']."'
+				)";
+			$isSuccess = $dataBaseController->setter($sql);
+			if (!$isSuccess) {
+				return false;
+			}
+			
+			$sql = "INSERT INTO user_model_arithmetic (gamer_id, game_id, property, sub_property, value, result)
+				VALUES (
+					'$gamerId', '$gameId', 'expenses', 'total_expenses', '".$profession['expenses']['totalExpenses']."', '".$profession['expenses']['totalExpenses']."'
+				)";
+			$isSuccess = $dataBaseController->setter($sql);
+			if (!$isSuccess) {
+				return false;
+			}
+			// Arithmetic table correction. Insert Money flow, Total_ncomes, expences (end)
+			
 			return true;
 		}
 		
@@ -132,7 +161,10 @@
 			$userModelArithmetic->setData(UserModelProperties::INCOMES . '_' . UserModelSubProperties::TOTAL_INCOMES, createArithmeticReturn($results));
 			
 			$results = getProperty($gamerId, UserModelProperties::MONEY_FLOW, -1, $dataBaseController);
-			$userModelArithmetic->setData(UserModelProperties::MONEY_FLOW, createArithmeticReturn($results));
+			$userModelArithmetic->setData(UserModelProperties::MONEY_FLOW, createArithmeticReturn($results));			
+			
+			$results = getProperty($gamerId, UserModelProperties::BANK_LOAN, -1, $dataBaseController);
+			$userModelArithmetic->setData(UserModelProperties::BANK_LOAN, createArithmeticReturn($results));			
 			
 			$responseCreator->setData('user_model_arithmetic', $userModelArithmetic->getData());
 			// user_model_arithmetic_(end)

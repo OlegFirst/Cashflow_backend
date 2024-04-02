@@ -54,6 +54,7 @@
 		const EXPENSES = 'expenses';
 		const MONEY_FLOW = 'money_flow';
 		const CASH = 'cash';
+		const BANK_LOAN = 'bank_loan';
 	}
 	
 	abstract class UserModelSubProperties {
