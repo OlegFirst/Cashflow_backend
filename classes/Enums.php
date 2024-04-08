@@ -81,4 +81,8 @@
 		const BUYED_BUSINESS = 'BUYED_BUSINESS';
 		const BUYED_CASH = 'BUYED_CASH';
 	}
+	
+	abstract class GameCases {
+		const BANKRUPT_CASH_FLOW_VALUE = -300;
+	}
 ?>

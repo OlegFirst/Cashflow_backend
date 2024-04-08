@@ -13,8 +13,7 @@
 			
 			// Get cash
 			$sql = "SELECT result FROM user_model_arithmetic WHERE gamer_id = '$gamerId' AND property = 'cash'";
-			$isCashPresent = $this->dataBaseController->checkDataPresent($sql);
-			
+			$isCashPresent = $this->dataBaseController->checkDataPresent($sql);			
 			if (!$isCashPresent) {
 				$gamerTurnData->setData('cash', 0);
 			} else {
@@ -22,9 +21,25 @@
 				if (!$results) {
 					$this->responseCreator->setError('Get cash error');
 					return $this->responseCreator->getData();
-				}				
+				}
+				$gamerTurnData->setData('cash',  end($results)['result']);
+			}
+			
+			// Check bankupt situation
+			$sql = "SELECT result FROM user_model_arithmetic WHERE gamer_id = '$gamerId' AND property = 'money_flow'";
+			$isMoneyFlowPresent = $this->dataBaseController->checkDataPresent($sql);
+			
+			if (!$isMoneyFlowPresent) {
+				$gamerTurnData->setData('is_bankrupt_value_present', false);
+			} else {
+				$results = $this->dataBaseController->getter($sql);
+				if (!$results) {
+					$this->responseCreator->setError('Get moneyFlow error');
+					return $this->responseCreator->getData();
+				}
 				
-				$gamerTurnData->setData('cash', end($results)['result']);
+				$moneyFlow = end($results)['result'];
+				$gamerTurnData->setData('is_bankrupt_value_present',  end($results)['result'] < GameCases::BANKRUPT_CASH_FLOW_VALUE);
 			}
 			
 			// Get incomes_real_estate
