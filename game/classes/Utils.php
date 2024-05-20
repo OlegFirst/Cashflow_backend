@@ -30,7 +30,7 @@
 			$isMoneyFlowPresent = $this->dataBaseController->checkDataPresent($sql);
 			
 			if (!$isMoneyFlowPresent) {
-				$gamerTurnData->setData('is_bankrupt_value_present', false);
+				$gamerTurnData->setData('is_bankrupt_value_present', '0');
 			} else {
 				$results = $this->dataBaseController->getter($sql);
 				if (!$results) {
@@ -39,7 +39,7 @@
 				}
 				
 				$moneyFlow = end($results)['result'];
-				$gamerTurnData->setData('is_bankrupt_value_present',  end($results)['result'] < GameCases::BANKRUPT_CASH_FLOW_VALUE);
+				$gamerTurnData->setData('is_bankrupt_value_present',  end($results)['result'] < GameCases::BANKRUPT_CASH_FLOW_VALUE ? '1' : '0');
 			}
 			
 			// Get incomes_real_estate

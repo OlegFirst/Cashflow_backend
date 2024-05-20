@@ -134,6 +134,11 @@
 			$results = $game->setDream($route['data']);
 			break;
 		// Dream_(end)
+		
+		// Set gamer bankrupt
+		case GameQueryElements::GAME_OWNER_SET_BANKRUPT:
+			$results = $game->setGamerBankrupt($route['data']);
+			break;
 			
 		default:
 			echo 'Bad game request';

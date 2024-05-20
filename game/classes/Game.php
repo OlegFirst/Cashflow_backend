@@ -66,7 +66,7 @@
 			$sqlArray = [];
 			
 			$sql = "SELECT 
-				gamer_id, is_small_path, path_position_id, color, path_position_left, path_position_top
+				gamer_id, is_small_path, path_position_id, color, path_position_left, path_position_top, is_bankrupt
 				FROM user_model WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
 			
@@ -83,7 +83,7 @@
 				return $this->responseCreator->getData();
 			}
 			
-			$this->responseCreator->setData('fishka_positions', $results[0]);			
+			$this->responseCreator->setData('fishka_positions', $results[0]);
 			$this->responseCreator->setData('is_game_begun', $results[1][0]['is_game_begun']);
 			$this->responseCreator->setData('common_small_agreement_id_list', array_map(
 				function($item){

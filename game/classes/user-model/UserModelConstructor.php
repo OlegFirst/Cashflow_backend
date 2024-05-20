@@ -2,8 +2,8 @@
 	class UserModelConstructor {
 		public static function create($gamerId, $gameId, $profession, $color, $dataBaseController) {	
 			// user_model
-			$sql = "INSERT INTO user_model (gamer_id, game_id, profession_name, profession_id, is_small_path, path_position_id, path_position_left, path_position_top, color, charity_turns_left)
-				VALUES ('$gamerId', '$gameId', '" . $profession['professionName'] . "', '" . $profession['id'] . "', '1', '0', '-130px', '725px', '$color', '0')";
+			$sql = "INSERT INTO user_model (gamer_id, game_id, profession_name, profession_id, is_small_path, path_position_id, path_position_left, path_position_top, color, charity_turns_left, is_bankrupt)
+				VALUES ('$gamerId', '$gameId', '" . $profession['professionName'] . "', '" . $profession['id'] . "', '1', '0', '-130px', '725px', '$color', '0', '0')";
 				
 			$isSuccess = $dataBaseController->setter($sql);
 			if (!$isSuccess) {
@@ -229,8 +229,12 @@
 			}
 			$responseCreator->setData('user_model_total', $results[0]);
 			
-			// user_model_buyed_dreams_(start)
+			// user_model Big Path_(start)
 			$bigPathCard = new Schema();
+			
+			$sql = "SELECT * FROM user_model_dream WHERE gamer_id = '$gamerId'";
+			$results = $dataBaseController->getter($sql);
+			$bigPathCard->setData('user_model_dream', $results[0]);
 			
 			$sql = "SELECT * FROM user_model_buyed_dreams WHERE gamer_id = '$gamerId'";
 			$results = $dataBaseController->getter($sql);
@@ -245,7 +249,7 @@
 			$bigPathCard->setData('user_model_buyed_cash', createArithmeticReturn($results));
 			
 			$responseCreator->setData('user_model_big_path_card', $bigPathCard->getData());
-			// user_model_buyed_dreams_(end)
+			// user_model Big Path_(end)
 			
 			return $responseCreator->getData();
 		}

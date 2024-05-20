@@ -27,27 +27,43 @@
 		}
 		
 		public function getBankruptedGamerNewProfession($usedProfesionIdList) {
+			// @return $this->professionList
 			$this->createProfessionList();
 			$professionListIndexRND = RNDCreator::proceed(count($this->professionList) - 1);
 			
-			$indexResult = -1;
+			print_r($usedProfesionIdList);
+			echo '<br/>';
+			print_r($this->professionList);
+			echo '<br/>';
+			print_r($professionListIndexRND);
+			echo '<br/>';
+			
+			
+			return [];
+			
+			
+			
+			$idRnd = -1;
 			for ($i = 0; $i < count($professionListIndexRND); $i++) {
-				$professionIndexRnd = $professionListIndexRND[$i];
+				$idRnd = $this->professionList[professionListIndexRND[$i]]['id'];
 				
-				if (!$this->checkIfIsUsed($professionIndexRnd, $usedProfesionIdList)) {
-					$indexResult = $professionIndexRnd;
+				echo $idRnd;
+				echo ', ';
+				
+				if (!$this->checkIfIdIsUsed($idRnd, $usedProfesionIdList)) {
+					
 					break;
 				}
 			}
 			
-			return $indexResult === -1 ? $this->professionList[0] : $this->professionList[$indexResult];
+			return $idRnd === -1 ? $this->professionList[0] : $this->professionList[$idRnd];
 		}
 		
-		private function checkIfIsUsed($professionIndexRnd, $usedProfesionIdList) {
+		private function checkIfIdIsUsed($id, $usedIdList) {
 			$isPresent = false;
 			
 			foreach ($usedIdList as $usedId) {
-				if ($usedId['profession_id'] === $this->professionList[$professionIndexRnd]['id']) {
+				if ($usedId['profession_id'] === $id) {
 					$isPresent = true;
 					break;
 				}

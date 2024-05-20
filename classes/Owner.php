@@ -154,8 +154,11 @@
 			$sql = "DELETE FROM cards_transfer WHERE game_id = '$gameId'";
 			array_push($sqlArray, $sql);
 			$sql = "DELETE FROM common_small_agreement WHERE game_id = '$gameId'";
-			array_push($sqlArray, $sql);			
-			
+			array_push($sqlArray, $sql);				
+			$sql = "DELETE FROM user_model_buyed_business WHERE game_id = '$gameId'";
+			array_push($sqlArray, $sql);
+			$sql = "DELETE FROM user_model_buyed_dreams WHERE game_id = '$gameId'";
+			array_push($sqlArray, $sql);
 			$isSuccess = $this->dataBaseController->setterArray($sqlArray);
 			
 			return $isSuccess;

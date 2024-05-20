@@ -1,10 +1,10 @@
 <?php
-	function gameRouter() {
+	function router() {
 		$queryElements = parseQuery();		
-		$route = array(
+		$route = [
 			'body' => null,
 			'data' => null
-		);
+		];
 		
 		if (
 			array_key_exists('info', $queryElements) &&

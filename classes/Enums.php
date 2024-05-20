@@ -41,6 +41,7 @@
 		const GAMER_GET_DREAM = 'get-dream';
 		const GAMER_SET_DREAM = 'set-dream';
 		const GAME_OWNER_GET_MONEY_IN_THE_WIND = 'get-m-w';
+		const GAME_OWNER_SET_BANKRUPT = 'set-gamer-bankrupt';
 	}
 	
 	abstract class GameProcessingModes {
@@ -83,6 +84,6 @@
 	}
 	
 	abstract class GameCases {
-		const BANKRUPT_CASH_FLOW_VALUE = -300;
+		const BANKRUPT_CASH_FLOW_VALUE = 300;
 	}
 ?>

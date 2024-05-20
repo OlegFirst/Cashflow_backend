@@ -327,5 +327,20 @@
 			
 			return $this->responseCreator->getData();
 		}
+		
+		public function setGamerBankrupt($data) {
+			$obj = json_decode($data['data']);			
+			$sql = "UPDATE user_model SET is_bankrupt = '1' WHERE gamer_id = '$obj->gamerIdTurn'";
+			
+			$isSuccess = $this->dataBaseController->setter($sql);
+			if (!$isSuccess) {
+				$this->responseCreator->setError('SET is_bankrupt error');
+				return $this->responseCreator->getData();
+			}
+			$this->responseCreator->setData('is_complete', '1');
+			$this->responseCreator->setData('complete_message', 'Гравець переведений у банкрутство');
+			
+			return $this->responseCreator->getData();
+		}
 	}
 ?>
