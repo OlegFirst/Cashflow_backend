@@ -43,6 +43,7 @@
 				$this->responseCreator->setError();
 				return $this->responseCreator->getData();
 			}
+			
 			foreach ($results as $item) {
 				array_push($gamerIdList, $item['id']);
 			}
@@ -53,45 +54,33 @@
 		protected function getAgreement($type) {			
 			$sql = "SELECT * FROM cards_transfer WHERE game_id = '$this->gameId' AND card_type = '$type'";						
 			$results = $this->dataBaseController->getter($sql);
+			
 			if (!$results) {
 				$this->responseCreator->setError('gamerGetAgreement error');
-				return $this->responseCreator->getData();
+				return $this->responseCreator->getData();			
 			}
+			
 			$this->responseCreator->setData('cards_transfer', $results[0]);
 			
 			return $this->responseCreator->getData();
 		}
 		
 		public function waitingConnection() {
-			$sqlArray = [];
+			$waitingConnection = new WaitingConnection(
+				$this->gameId, $this->dataBaseController, $this->responseCreator
+			);
 			
-			$sql = "SELECT 
-				gamer_id, is_small_path, path_position_id, color, path_position_left, path_position_top, is_bankrupt
-				FROM user_model WHERE game_id = '$this->gameId'";
-			array_push($sqlArray, $sql);
+			return $waitingConnection->get();
+		}
+		
+		public function setWaitingConnection($data) {
+			$obj = json_decode($data['data']);
 			
-			$sql = "SELECT is_game_begun FROM game_info WHERE id = '$this->gameId'";
-			array_push($sqlArray, $sql);
+			$waitingConnection = new WaitingConnection(
+				$this->gameId, $this->dataBaseController, $this->responseCreator
+			);
 			
-			$sql = "SELECT small_agreement_id FROM common_small_agreement WHERE game_id = '$this->gameId'";
-			array_push($sqlArray, $sql);
-				
-			$results = $this->dataBaseController->getterArray($sqlArray);
-			
-			if (!$results) {
-				$this->responseCreator->setError('waitingConnection error');
-				return $this->responseCreator->getData();
-			}
-			
-			$this->responseCreator->setData('fishka_positions', $results[0]);
-			$this->responseCreator->setData('is_game_begun', $results[1][0]['is_game_begun']);
-			$this->responseCreator->setData('common_small_agreement_id_list', array_map(
-				function($item){
-					return $item['small_agreement_id'];
-				}, $results[2]
-			));
-			
-			return $this->responseCreator->getData();
+			return $waitingConnection->set($obj->marketId);
 		}
 	}
 ?>

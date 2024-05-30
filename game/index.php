@@ -15,6 +15,7 @@
 	include '../cards/CardConstructor.php';
 	include './classes/user-model/sql-creators/Insert.php';
 	include './classes/game-instance/GameSingelton.php';
+	include './classes/waiting-connection/WaitingConnection.php';
 	
 	if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 		header("HTTP/1.1 400 Bad request method");
@@ -68,6 +69,10 @@
 		// Waiting connection
 		case GameQueryElements::WAITING_CONNECTION:
 			$results = $game->waitingConnection();
+			break;
+			
+		case GameQueryElements::SET_WAITING_CONNECTION:
+			$results = $game->setWaitingConnection($route['data']);
 			break;
 			
 		// Fishka

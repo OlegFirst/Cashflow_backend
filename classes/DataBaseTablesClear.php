@@ -4,14 +4,12 @@
 		private $gameId = null;
 		
 		private $dataBaseController = null;
-		// private $responseCreator = null;
 		
 		public function __construct($userId, $gameId) {
 			$this->userId = $userId;
 			$this->gameId = $gameId;
 			
 			$this->dataBaseController = new DataBaseController();
-			// $this->responseCreator = new ResponseCreator();
 		}
 		
 		public function gamerBunkrupt() {
@@ -47,50 +45,52 @@
 			$this->dataBaseController->setterArray($sqlArray);
 		}
 		
-		public function removeGame($data) {
-			$gameId = $data['game_id'];
+		public function removeGame() {
 			$sqlArray = [];
 			
-			$sql = "DELETE FROM game_info WHERE id = '$gameId'";
+			$sql = "DELETE FROM game_info WHERE id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM msg WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM msg WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM users WHERE game_id = '$gameId' AND user_role_id = '3'";
+			$sql = "DELETE FROM users WHERE game_id = '$this->gameId' AND user_role_id = '3'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_actions WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_actions WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_arithmetic WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_arithmetic WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_assets_const WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_assets_const WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);			
-			$sql = "DELETE FROM user_model_business WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_business WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_child_expenses_const WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_child_expenses_const WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_credit_liabilities_const WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_credit_liabilities_const WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_expenses_const WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_expenses_const WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_incomes_const WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_incomes_const WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_real_estate WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_real_estate WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM cards WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM cards WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_dream WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_dream WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_total WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_total WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM cards_transfer WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM cards_transfer WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM common_small_agreement WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM common_small_agreement WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);				
-			$sql = "DELETE FROM user_model_buyed_business WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_buyed_business WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
-			$sql = "DELETE FROM user_model_buyed_dreams WHERE game_id = '$gameId'";
+			$sql = "DELETE FROM user_model_buyed_dreams WHERE game_id = '$this->gameId'";
 			array_push($sqlArray, $sql);
+			$sql = "DELETE FROM common_events WHERE game_id = '$this->gameId'";
+			array_push($sqlArray, $sql);
+			
 			$isSuccess = $this->dataBaseController->setterArray($sqlArray);
 			
 			return $isSuccess;

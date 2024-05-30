@@ -31,6 +31,7 @@
 		const GAMER_START_TURN = 'gamer-start-turn';
 		const GAMER_END_TURN = 'gamer-end-turn';
 		const WAITING_CONNECTION = 'waiting-connection';
+		const SET_WAITING_CONNECTION = 'set-waiting-connection';
 		const GAME_OWNER_SEND_AGREEMENT_TO_GAMER = 'send-agreement-to-gamer';
 		const GAME_OWNER_SEND_COMMON_AGREEMENT_TO_GAMER = 'send-common-agreement-to-gamer';
 		const GAME_OWNER_REMOVE_AGREEMENT_FROM_GAMER = 'game-remove-agreement-from-gamer';
