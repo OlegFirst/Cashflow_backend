@@ -63,7 +63,7 @@
 			} else {
 				$this->responseCreator->setData('common_events', [
 					'gamer_id_turn' => $results[0][0]['gamer_id_turn'],
-					'market_id' => $results[1][0]['market_id'],
+					'market_id' => count($results[1]) > 0 ?  $results[1][0]['market_id'] : '-1',
 					'time_stamp' => $timeStamp
 				]);
 			}
